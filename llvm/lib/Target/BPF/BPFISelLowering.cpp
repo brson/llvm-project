@@ -921,6 +921,14 @@ SDValue BPFTargetLowering::LowerATOMICRMW(SDValue Op, SelectionDAG &DAG) const {
   return Ret;
 }
 
+bool BPFTargetLowering::shouldSignExtendTypeInLibCall(EVT Type,
+                                                      bool IsSigned) const {
+  if (Type == MVT::i32)
+      return true;
+
+  return IsSigned;
+}
+
 const char *BPFTargetLowering::getTargetNodeName(unsigned Opcode) const {
   switch ((BPFISD::NodeType)Opcode) {
   case BPFISD::FIRST_NUMBER:
